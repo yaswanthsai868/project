@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class LoginService {
 
   constructor(private hc:HttpClient) { }
-  doRegister(formObject):Observable<any>
+  username:string;
+  status:boolean;
+  doLogin(formObject):Observable<any>
   {
-    return this.hc.post('/user/register',formObject);
+    return this.hc.post('/user/login',formObject);
   }
-  
 }

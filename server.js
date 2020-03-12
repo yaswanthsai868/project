@@ -14,6 +14,8 @@ const adminApi=require('./apis/adminapi')
 //connecting to frontend
 app.use(exp.static(path.join(__dirname,'./dist/ecommerce')))
 
+app.use(exp.json())
+
 //sending request to admin and user api
 app.use('/admin',adminApi)
 app.use('/user',userApi)

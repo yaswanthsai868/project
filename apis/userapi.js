@@ -4,11 +4,14 @@ const bcrypt=require('bcrypt')
 
 const userApp=exp.Router()
 
-userApp.use(exp.json())
+
+const jwt=require('jsonwebtoken')
 
 const dataBaseObj=require('../db')
+
+dataBaseObj.initDb();
+
 userApp.post('/register',(req,res)=>{
-    dataBaseObj.initDb();
     userCollection=dataBaseObj.getDb().userCollection;
     userCollection.findOne({username:req.username},(err,obj)=>{
         if(err)
@@ -43,7 +46,49 @@ userApp.post('/register',(req,res)=>{
             })
                 }
             });
-            
-});
+        });
 
-module.exports=userApp
+
+//login
+userApp.post('/login',(req,res)=>{
+    userCollection=dataBaseObj.getDb().userCollection;
+    userCollection.findOne({username:req.body.username},(err,obj)=>{
+        if(err)
+        {
+            console.log("Error while checking username")
+        }
+        else if(obj==null)
+        {
+            res.send({message:"Invalid Username"})
+        }
+        else
+        {
+            bcrypt.compare(req.body.password,obj.password,(err,status)=>{
+                if(err)
+                {
+                    console.log("error while checking password")
+                }
+                else if(status==true)
+                {
+                    jwt.sign({username:req.body.username},'yash',{expiresIn:60},(err,token)=>{
+                        if(err)
+                        {
+                            console.log('Error in signing the token')
+                        }
+                        else
+                        {
+                            res.send({token:token,message:req.body.username})
+                        }
+                    })
+                }
+                else
+                {
+                    res.send({message:"Invalid password"})
+                }
+            })
+            
+        }
+    })
+})
+
+module.exports=userApp;
