@@ -5,12 +5,12 @@
       <h2 class="active">Sign Up </h2>
   
       <!-- Login Form -->
-      <form>
-        <input type="text" id="name" class="fadeIn first" name="name" placeholder="Enter name">
-        <input type="text" id="mobile" class="fadeIn second" name="mobile" placeholder="Enter Mobile Number">
-        <input type="email" id="email" class="fadeIn second" name="email" placeholder="Enter email id">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter password">
-        <input type="submit" class="fadeIn third" value="Sign Up">
+      <form #ref=ngForm (ngSubmit)=register(ref.value);ref.reset()>
+        <input type="text" id="name" class="fadeIn first" name="name" placeholder="Enter name" ngModel>
+        <input type="text" id="mobile" class="fadeIn second" name="phoneno" placeholder="Enter Mobile Number" ngModel>
+        <input type="email" id="email" class="fadeIn second" name="username" placeholder="Enter email id" ngModel>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter password" ngModel>
+        <button type="submit" class="fadeIn third btn btn-primary mb-2" value="Sign Up">Sign Up</button>
       </form>
   
       

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 
@@ -18,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private ls:LoginService,private router:Router) { }
   login(formObject)
   {
+      console.log(formObject)
       this.ls.doLogin(formObject).subscribe((res)=>{
         if(res['message']=='Invalid Username')
         {
@@ -29,10 +29,17 @@ export class LoginComponent implements OnInit {
         }
         else
         {
-          this.router.navigateByUrl('/user/mainpage')
           this.ls.username=res['message']
           this.ls.status=true;
           localStorage.setItem('token',res['token'])
+          if(this.ls.username=='admin')
+          {
+            this.router.navigateByUrl('/admin')
+          }
+          else
+          {
+            this.router.navigateByUrl('/user/mainpage')
+          }
         }
       });
   }

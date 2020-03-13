@@ -5,10 +5,10 @@
       <h2 class="inactive underlineHover"><a  routerLink="/user/signup" >Sign Up</a> </h2>
   
       <!-- Login Form -->
-      <form>
-        <input type="text" id="login" class="fadeIn first" name="login" placeholder="login">
-        <input type="password" id="password" class="fadeIn second" name="login" placeholder="password">
-        <input type="submit" class="fadeIn third" value="Log In">
+      <form #ref=ngForm (ngSubmit)=login(ref.value);ref.reset()>
+        <input type="text" id="login" class="fadeIn first" name="username" placeholder="login" ngModel>
+        <input type="password" id="password" class="fadeIn second" name="password" placeholder="password" ngModel>
+        <button type="submit" class="fadeIn third btn btn-primary mb-1">Log In</button>
       </form>
   
       <!-- forgot Passowrd -->
