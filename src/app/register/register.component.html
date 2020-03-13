@@ -6,10 +6,10 @@
   
       <!-- Login Form -->
       <form #ref=ngForm (ngSubmit)=register(ref.value);ref.reset()>
-        <input type="text" id="name" class="fadeIn first" name="name" placeholder="Enter name" ngModel>
-        <input type="text" id="mobile" class="fadeIn second" name="phoneno" placeholder="Enter Mobile Number" ngModel>
         <input type="email" id="email" class="fadeIn second" name="username" placeholder="Enter email id" ngModel>
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter password" ngModel>
+        <input type="text" id="name" class="fadeIn first" name="name" placeholder="Enter name" ngModel>
+        <input type="text" id="mobile" class="fadeIn second" name="phoneno" placeholder="Enter Mobile Number" ngModel>
         <button type="submit" class="fadeIn third btn btn-primary mb-2" value="Sign Up">Sign Up</button>
       </form>
   
