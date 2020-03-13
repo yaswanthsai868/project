@@ -1,30 +1,19 @@
-<div class='row'>
-
-    <div class="col-3">
-
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="inactive underlineHover"> <a  routerLink="/signin">Sign In</a> </h2>
+      <h2 class="active">Sign Up </h2>
+  
+      <!-- Login Form -->
+      <form>
+        <input type="text" id="name" class="fadeIn first" name="name" placeholder="Enter name">
+        <input type="text" id="mobile" class="fadeIn second" name="mobile" placeholder="Enter Mobile Number">
+        <input type="email" id="email" class="fadeIn second" name="email" placeholder="Enter email id">
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter password">
+        <input type="submit" class="fadeIn third" value="Sign Up">
+      </form>
+  
+      
+  
     </div>
-    <div class="col-6">
-        <div class="jumbotron-fluid">
-            <form #ref="ngForm" (ngSubmit)="register(ref.value);ref.reset()">
-                <div class="row">
-                        <div class="col-3"><label for="username">Enter username:</label></div>
-                        <div class="col-9"><input type="email" name="username" id="" class="form-control" ngModel></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><label for="password">Enter Password:</label></div>
-                    <div class="col-9"><input type="password" name="password" id="" class="form-control" ngModel></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><label for="name">Enter Name:</label></div>
-                    <div class="col-9"><input type="text" name="name" id="" class="form-control" ngModel></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><label for="phoneno">Enter Phone number:</label></div>
-                    <div class="col-9"><input type="text" name="phoneno" id="" class="form-control" ngModel></div>
-                </div>
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-        </div>
-
-    </div>
-</div>
+  </div>
