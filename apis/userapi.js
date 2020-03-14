@@ -13,7 +13,7 @@ dataBaseObj.initDb();
 
 userApp.post('/register',(req,res)=>{
     userCollection=dataBaseObj.getDb().userCollection;
-    userCollection.findOne({username:req.username},(err,obj)=>{
+    userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)
         {
             console.log('Error while finding'+err);

@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,11 +10,21 @@ import { DataService } from '../data.service';
 })
 export class RegisterComponent{
 
-  constructor(private ds:DataService) { }
+  constructor(private ds:DataService,private router:Router) { }
 
   register(formObject)
   {
-    this.ds.doRegister(formObject).subscribe((res)=>{alert(res['message'])});
+    this.ds.doRegister(formObject).subscribe((res)=>{
+      if(res['message']=='User already exists')
+      {
+        alert(res['message'])
+      }
+      else
+      {
+        alert(res['message'])
+        this.router.navigateByUrl('/signin')
+      }
+    });
   }
 
 }
