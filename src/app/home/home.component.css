@@ -1,0 +1,25 @@
+.carouselbg
+{
+    background-color: rgba(6, 8, 7, 0.158);
+}
+.LatestLaunches,.Mostpopularproducts
+{
+    text-decoration: black;
+    font-size: 25px;
+    font-weight: bold;
+}
+.viewall
+{
+    display: inline;
+    text-align: right;
+}
+.card-footer
+{
+  font-weight: bold;
+}
+.card-image
+{
+    width: 100%;
+    height: 200px;
+    
+}
