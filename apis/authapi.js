@@ -102,6 +102,30 @@ auth.get('/resetpassword/:token',(req,res)=>{
     })
 })
 
+//changing the password
+
+auth.post('/changepassword',(req,res)=>{
+    bcrypt.hash(req.body.password,7,(err,hashedPass)=>{
+        if(err)
+        {
+            console.log('error in hashing the password',err);
+        }
+        else
+        {
+            userCollection=dataBaseObj.getDb().userCollection;
+            userCollection.updateOne({username:req.body.username},{$set:{password:hashedPass}},(err,obj)=>{
+                if(err)
+                {
+                    console.log('Error while updating the password',err)
+                }
+                else
+                {
+                    res.send({message:'Password changed successfully'})
+                }
+            })
+        }
+    })
+})
 
 
 module.exports=auth
