@@ -55,7 +55,7 @@ userApp.post('/login',(req,res)=>{
     userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)
         {
-            console.log("Error while checking username")
+            console.log("Error while checking username",err)
         }
         else if(obj==null)
         {
@@ -66,7 +66,7 @@ userApp.post('/login',(req,res)=>{
             bcrypt.compare(req.body.password,obj.password,(err,status)=>{
                 if(err)
                 {
-                    console.log("error while checking password")
+                    console.log("error while checking password",err)
                 }
                 else if(status==true)
                 {
@@ -90,5 +90,6 @@ userApp.post('/login',(req,res)=>{
         }
     })
 })
+
 
 module.exports=userApp;

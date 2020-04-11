@@ -8,9 +8,9 @@ var adminCollection;
 function initDb()
 {
     db.connect('mongodb+srv://nani868:Nani1211@cluster0-vaxak.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser:true,useUnifiedTopology:true},(err,db)=>{
-if(db==undefined)
+if(err)
 {
-    console.log('error in connecting to database');
+    console.log('error in connecting to database',err);
 }
 else
 {

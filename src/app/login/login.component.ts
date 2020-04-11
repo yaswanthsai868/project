@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   constructor(private ls:LoginService,private router:Router) { }
   login(formObject)
   {
-      console.log(formObject)
       this.ls.doLogin(formObject).subscribe((res)=>{
         if(res['message']=='Invalid Username')
         {
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
         }
         else if(res['message']=='Invalid password')
         {
-          alert('please wnter valid password')
+          alert('please enter valid password')
         }
         else
         {

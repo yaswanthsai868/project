@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AdminModule} from './admin/admin.module';
 import {UserModule} from './user/user.module'
+import { AutherizationService } from './autherization.service';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import {UserModule} from './user/user.module'
     LoginComponent,
     RegisterComponent,
     AboutusComponent,
-    HomeComponent
+    HomeComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import {UserModule} from './user/user.module'
     HttpClientModule,
     AdminModule,UserModule
   ],
-  providers: [],
+  providers: [
+    AutherizationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
