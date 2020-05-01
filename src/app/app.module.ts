@@ -13,6 +13,7 @@ import {UserModule} from './user/user.module'
 import { AutherizationService } from './autherization.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { OtppageComponent } from './otppage/otppage.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OtppageComponent } from './otppage/otppage.component';
     AboutusComponent,
     HomeComponent,
     ForgotpasswordComponent,
-    OtppageComponent
+    OtppageComponent,
+    ResetpassComponent
   ],
   imports: [
     BrowserModule,

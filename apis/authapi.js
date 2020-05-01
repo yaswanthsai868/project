@@ -124,5 +124,62 @@ auth.post('/changepassword',verifyToken,(req,res)=>{
     })
 })
 
+//verifying otp
+auth.post('/verifyotp',(req,res)=>{
+    req.app.locals.resetPasswordCollection.findOne({username:req.body.username},(err,usrobj)=>{
+        if(err)
+        {
+            console.log('error in searching user',err)
+        }
+        else if(usrobj==null)
+        {
+            res.send({message:'Otp has expired new otp has been sent to your mail'})
+        }
+        else
+        {
+            jwt.verify(usrobj.otpToken,process.env.hashKey,(err,unSignedToken)=>{
+                if(err)
+                {
+                    res.send({message:'Otp has expired new otp has been sent to your mail'})
+                }
+                else
+                {
+                    if(unSignedToken.otp==req.body.otp)
+                    {
+                        res.send({message:'Correct password'})
+                    }
+                    else
+                    {
+                        res.send({message:'You have entered incorrect OTP please try again'})
+                    }
+                }
+            })
+        }
+    })
+})
+
+//password resetting
+auth.post('/resetpassword',(req,res)=>{
+    bcrypt.hash(req.body.password,7,(err,hashedPassword)=>{
+        if(err)
+        {
+            console.log('Error in hashing the password',err)
+        }
+        else
+        {
+            req.app.locals.userCollection.updateOne({username:req.body.username},{$set:{password:hashedPassword}},(err,usrObj)=>{
+                if(err)
+                {
+                    console.log('error while saving hashed password',err)
+                }
+                else
+                {
+                    res.send({message:'Password changed successfully'})
+                }
+            })
+        }
+    })
+})
+
 
 module.exports=auth

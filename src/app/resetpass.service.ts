@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class VerifyotpService {
-  otpSatus:boolean;
+export class ResetpassService {
+
   constructor(private hc:HttpClient) { }
-  doVerifyOTP(otp):Observable<any>
+
+  resetPassword(userObj):Observable<any>
   {
-    return this.hc.post(`/auth/verifyotp`,otp);
+    return this.hc.post('/auth/resetpassword',userObj);
   }
 }

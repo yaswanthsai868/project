@@ -6,6 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { OtppageComponent } from './otppage/otppage.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
+import { ResetpassgaurdGuard } from './resetpassgaurd.guard';
 
 
 const routes: Routes = [
@@ -15,7 +17,8 @@ const routes: Routes = [
   {path:"user/signup",component:RegisterComponent},
   {path:"aboutus",component:AboutusComponent},
   {path:'forgotpassword',component:ForgotpasswordComponent},
-  {path:'otp/:username',component:OtppageComponent}
+  {path:'otp/:username',component:OtppageComponent},
+  {path:'reset/:username',component:ResetpassComponent,canActivate:[ResetpassgaurdGuard]}
 ];
 
 @NgModule({

@@ -31,6 +31,20 @@ app.use('/admin',adminApi)
 app.use('/user',userApi)
 app.use('/auth',authapi)
 
+var schedulerjob=scheduler.scheduleJob('0 0 * * *',()=>{
+    console.log('Server is under Maintainance')
+    app.locals.resetPasswordCollection.deleteMany({},(err,obj)=>{
+        if(err)
+        {
+            console.log('error while deleting records',err)
+        }
+        else
+        {
+            console.log('server back online')
+        }
+    })
+})
+
 mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true},(err,clientObj)=>{
     if(err)
     {
@@ -42,19 +56,6 @@ mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true}
         app.locals.adminCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionAdmin);
         app.locals.resetPasswordCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionResetPass)
         console.log('Database connected.....')
-        var schedulerjob=scheduler.scheduleJob('* 1 * * * *',()=>{
-            console.log('Server is under Maintainance')
-            app.locals.dbCollectionResetPass.deleteMany({},(err,obj)=>{
-                if(err)
-                {
-                    console.log('error while deleting records',err)
-                }
-                else
-                {
-                    console.log('server back online')
-                }
-            })
-        })
         app.listen(process.env.port,()=>{console.log(`server listening on port:${process.env.port}.....`)});
     }
 })
