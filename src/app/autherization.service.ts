@@ -11,7 +11,6 @@ export class AutherizationService implements HttpInterceptor{
   intercept(req:HttpRequest<any>,next:HttpHandler):Observable<HttpEvent<any>>
   {
     let token=localStorage.getItem('token')
-    console.log(token)
     if(token==undefined)
     {
       return next.handle(req);

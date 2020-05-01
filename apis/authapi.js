@@ -8,6 +8,8 @@ const nodemailer=require('nodemailer')
 
 const bcrypt=require('bcrypt')
 
+const verifyToken=require('../middleware/verifyToken')
+
 const transporter=nodemailer.createTransport({
     service:'gmail',
     auth:{
@@ -99,7 +101,7 @@ auth.get('/resetpassword/:token',(req,res)=>{
 
 //changing the password
 
-auth.post('/changepassword',(req,res)=>{
+auth.post('/changepassword',verifyToken,(req,res)=>{
     bcrypt.hash(req.body.password,7,(err,hashedPass)=>{
         if(err)
         {
