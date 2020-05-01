@@ -146,7 +146,7 @@ auth.post('/verifyotp',(req,res)=>{
                 {
                     if(unSignedToken.otp==req.body.otp)
                     {
-                        res.send({message:'Correct password'})
+                        res.send({message:'Correct OTP'})
                     }
                     else
                     {
