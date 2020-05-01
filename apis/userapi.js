@@ -4,6 +4,7 @@ const bcrypt=require('bcrypt')
 
 const userApp=exp.Router()
 
+const verifyToken=require('../middleware/verifyToken')
 
 const jwt=require('jsonwebtoken')
 
@@ -91,5 +92,8 @@ userApp.post('/login',(req,res)=>{
     })
 })
 
+userApp.get('/check',verifyToken,(req,res)=>{
+    res.send({message:'Clicked'})
+})
 
 module.exports=userApp;

@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { HomeComponent } from './home/home.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AdminModule} from './admin/admin.module';
 import {UserModule} from './user/user.module'
 import { AutherizationService } from './autherization.service';
@@ -29,7 +29,11 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     AdminModule,UserModule
   ],
   providers: [
-    AutherizationService
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AutherizationService,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })
