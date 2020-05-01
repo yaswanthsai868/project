@@ -89,7 +89,15 @@ userApp.post('/login',(req,res)=>{
 })
 
 userApp.get('/check',verifyToken,(req,res)=>{
+    If()
     res.send({message:'Clicked'})
+})
+
+userApp.use((err,req,res,next)=>{
+    if(err)
+    {
+        res.send({message:`${err.name}: ${err.message}`})
+    }
 })
 
 module.exports=userApp;

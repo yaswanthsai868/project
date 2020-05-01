@@ -37,8 +37,12 @@ mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true}
     {
         app.locals.userCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionUser);
         app.locals.adminCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionAdmin);
+        console.log('Database connected.....')
         app.listen(process.env.port,()=>{console.log(`server listening on port:${process.env.port}.....`)});
     }
 })
 
 
+app.use((req,res,next)=>{
+    res.send({message:`Path ${req.url} not found for the method ${req.method}`})
+})
