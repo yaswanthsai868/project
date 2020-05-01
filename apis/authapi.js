@@ -33,73 +33,73 @@ auth.post('/forgotpassword',(req,res)=>{
         }
         else
         {
-            jwt.sign({username:req.body.username,password:req.body.password},'yash',{expiresIn:60},(err,token)=>{
+            let otp=Math.floor(Math.random()*1000000 +1)
+            jwt.sign({username:obj.username,otp:otp},process.env.hashKey,{expiresIn:300},(err,signedToken)=>{
                 if(err)
                 {
-                    console.log('Error while signing the token',err);
+                    console.log('error while signing otp token',err)
                 }
                 else
                 {
-                    const mailOptions={
-                        from:'electronica.ekart@gmail.com',
-                        to:req.body.username,
-                        subject:'Password Reset Link',
-                        html:"<p>Click the below link to confirm  request to change your password.The link expires in a minute.</p><a href='http://localhost:3000/auth/resetpassword/"+token+"'>Click here</a>"
-                    }
-                    transporter.sendMail(mailOptions,(err,info)=>{
+                    req.app.locals.resetPasswordCollection.findOne({username:obj.username},(err,resetobj)=>{
                         if(err)
                         {
-                            console.log('Error while sending the mail',err)
+                            console.log('error while checking the resetCollection',err)
+                        }
+                        else if(resetobj==null)
+                        {
+                            req.app.locals.resetPasswordCollection.insertOne({username:obj.username,otpToken:signedToken},(err,iobj)=>{
+                                if(err)
+                                {
+                                    console.log('error in the inserting the otp token',err)
+                                }
+                                else
+                                {
+                                    console.log('Inserted the otp jwt')
+                                }
+                            })
                         }
                         else
                         {
-                            res.send({message:"Password reset link has been sent to your email"})
+                            req.app.locals.resetPasswordCollection.updateOne({username:obj.username},{$set:{otpToken:signedToken}},(err,uobj)=>{
+                                if(err)
+                                {
+                                    console.log('error while updating the otp token',err);
+                                }
+                                else
+                                {
+                                    console.log('updated the otp jwt')
+                                }
+                            })
                         }
+                        const mailOptions={
+                            from:process.env.nodemailerUser,
+                            to:req.body.username,
+                            subject:'Password Reset OTP',
+                            html:"<p>OTP for password reset is "+otp+"</p>"
+                        }
+                        transporter.sendMail(mailOptions,(err,info)=>{
+                            if(err)
+                            {
+                                console.log('Error while sending the mail',err)
+                            }
+                            else
+                            {
+                                res.send({message:"Password reset OTP has been sent to your email",username:obj.username})
+                            }
+                        })
                     })
+                    
+                    
                 }
+                
             })
+
         }
     })
 })
     
-//password resetter
-
-auth.get('/resetpassword/:token',(req,res)=>{
-    token=req.params.token;
-    jwt.verify(token,'yash',(err,decodedtoken)=>{
-        if(err)
-        {
-            console.log('Error while verifying the token',err);
-        }
-        else
-        {
-            user=decodedtoken.username;
-            pass=decodedtoken.password;
-            userCollection=req.app.locals.userCollection;
-            bcrypt.hash(pass,7,(err,hashedpass)=>{
-                if(err)
-                {
-                    console.log('Error while encrypting the password',err);
-                }
-                else
-                {
-                    userCollection.updateOne({username:user},{$set:{password:hashedpass}},(err,obj)=>{
-                        if(err)
-                        {
-                            console.log('Error while updating the password',err)
-                        }
-                        else
-                        {
-                            res.send({message:'Password has been changed'})
-                        }
-                    });
-                }
-            })
-        }
-    })
-})
-
-//changing the password
+// changing the password
 
 auth.post('/changepassword',verifyToken,(req,res)=>{
     bcrypt.hash(req.body.password,7,(err,hashedPass)=>{

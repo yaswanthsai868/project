@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form #ref=ngForm (ngSubmit)=verifyOtp(ref)>
+            <div class="form-group">
+                <label for="one">Enter the otp sent to your mail</label>
+                <input type="text" name="otp" id="one" ngModel class="form-control">
+            </div>
+            <div style="text-align: center;">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>

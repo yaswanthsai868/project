@@ -4,6 +4,9 @@ const exp=require('express')
 //importing path package
 const path=require('path')
 
+//importing node scheduler
+const scheduler=require('node-schedule')
+
 //creating the express object by calling the express function
 const app=exp()
 
@@ -37,7 +40,21 @@ mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true}
     {
         app.locals.userCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionUser);
         app.locals.adminCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionAdmin);
+        app.locals.resetPasswordCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionResetPass)
         console.log('Database connected.....')
+        var schedulerjob=scheduler.scheduleJob('* 1 * * * *',()=>{
+            console.log('Server is under Maintainance')
+            app.locals.dbCollectionResetPass.deleteMany({},(err,obj)=>{
+                if(err)
+                {
+                    console.log('error while deleting records',err)
+                }
+                else
+                {
+                    console.log('server back online')
+                }
+            })
+        })
         app.listen(process.env.port,()=>{console.log(`server listening on port:${process.env.port}.....`)});
     }
 })

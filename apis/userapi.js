@@ -67,7 +67,7 @@ userApp.post('/login',(req,res)=>{
                 }
                 else if(status==true)
                 {
-                    jwt.sign({username:req.body.username},'yash',{expiresIn:60},(err,token)=>{
+                    jwt.sign({username:req.body.username},process.env.hashKey,{expiresIn:60},(err,token)=>{
                         if(err)
                         {
                             console.log('Error in signing the token')

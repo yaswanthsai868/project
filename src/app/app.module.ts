@@ -12,6 +12,7 @@ import {AdminModule} from './admin/admin.module';
 import {UserModule} from './user/user.module'
 import { AutherizationService } from './autherization.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { OtppageComponent } from './otppage/otppage.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     RegisterComponent,
     AboutusComponent,
     HomeComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    OtppageComponent
   ],
   imports: [
     BrowserModule,

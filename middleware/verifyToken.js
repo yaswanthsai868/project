@@ -9,7 +9,7 @@ let verifyToken=(req,res,next)=>{
     else
     {
         extractedToken=authorizationToken.split(' ')[1]
-        jwt.verify(extractedToken,'yash',(err,decodedToken)=>{
+        jwt.verify(extractedToken,process.env.hashKey,(err,decodedToken)=>{
             if(err)
             {
                 res.send({message:'Please relogin'})

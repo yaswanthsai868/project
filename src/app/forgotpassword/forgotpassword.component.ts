@@ -15,12 +15,6 @@ export class ForgotpasswordComponent{
   }
   forgot(EmailObjectRef):void
   {
-    if(EmailObjectRef.value.password!=EmailObjectRef.value.verify)
-    {
-      alert('Entered passwords do not match')
-    }
-    else
-    {
       this.fp.forgotPassword(EmailObjectRef.value).subscribe((res)=>{
         if(res['message']=='Invalid username')
         {
@@ -29,10 +23,9 @@ export class ForgotpasswordComponent{
         else
         {
           alert(res['message']);
-          this.router.navigateByUrl('/home');
+          this.router.navigate(['otp',res['username']]);
         }
       })
       EmailObjectRef.reset();
-    }
   }
 }
