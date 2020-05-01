@@ -11,20 +11,15 @@ const bcrypt=require('bcrypt')
 const transporter=nodemailer.createTransport({
     service:'gmail',
     auth:{
-        user:'electrnica.ekart@gmail.com',
-        pass:'Nani@1211'
+        user:process.env.nodemailerUser,
+        pass:process.env.nodemailerPass
     }
 })
 
-const dataBaseObj=require('../db')
-
-dataBaseObj.initDb();
-
-var userCollection;
 
 // forgot password mail sender
 auth.post('/forgotpassword',(req,res)=>{
-    userCollection=dataBaseObj.getDb().userCollection;
+    userCollection=req.app.locals.userCollection;
     userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)
         {
@@ -78,7 +73,7 @@ auth.get('/resetpassword/:token',(req,res)=>{
         {
             user=decodedtoken.username;
             pass=decodedtoken.password;
-            userCollection=dataBaseObj.getDb().userCollection;
+            userCollection=req.app.locals.userCollection;
             bcrypt.hash(pass,7,(err,hashedpass)=>{
                 if(err)
                 {
@@ -112,7 +107,7 @@ auth.post('/changepassword',(req,res)=>{
         }
         else
         {
-            userCollection=dataBaseObj.getDb().userCollection;
+            userCollection=req.app.locals.userCollection;
             userCollection.updateOne({username:req.body.username},{$set:{password:hashedPass}},(err,obj)=>{
                 if(err)
                 {

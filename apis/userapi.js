@@ -8,12 +8,8 @@ const verifyToken=require('../middleware/verifyToken')
 
 const jwt=require('jsonwebtoken')
 
-const dataBaseObj=require('../db')
-
-dataBaseObj.initDb();
-
 userApp.post('/register',(req,res)=>{
-    userCollection=dataBaseObj.getDb().userCollection;
+    userCollection=req.app.locals.userCollection;
     userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)
         {
@@ -52,7 +48,7 @@ userApp.post('/register',(req,res)=>{
 
 //login
 userApp.post('/login',(req,res)=>{
-    userCollection=dataBaseObj.getDb().userCollection;
+    userCollection=req.app.locals.userCollection;
     userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)
         {
