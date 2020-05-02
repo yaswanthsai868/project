@@ -22,7 +22,4 @@ let verifyToken=(req,res,next)=>{
     }
 }
 
-let test=()=>{
-    console.log('hello')
-}
 module.exports=verifyToken;
