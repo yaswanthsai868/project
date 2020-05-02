@@ -22,4 +22,8 @@ let verifyToken=(req,res,next)=>{
     }
 }
 
+let k=()=>{
+    console.log('test')
+}
+
 module.exports=verifyToken;
