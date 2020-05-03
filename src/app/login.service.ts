@@ -7,9 +7,10 @@ import {Observable} from 'rxjs'
 })
 export class LoginService {
 
-  constructor(private hc:HttpClient) { }
+  constructor(private hc:HttpClient) {}
   username:string;
   status:boolean;
+  isAdmin:boolean;
   doLogin(formObject):Observable<any>
   {
     return this.hc.post('/user/login',formObject);
