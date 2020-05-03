@@ -8,6 +8,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { OtppageComponent } from './otppage/otppage.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
 import { ResetpassgaurdGuard } from './resetpassgaurd.guard';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:"aboutus",component:AboutusComponent},
   {path:'forgotpassword',component:ForgotpasswordComponent},
   {path:'otp/:username',component:OtppageComponent},
+  {path:'admin/addProduct',component:AddProductComponent},
   {path:'reset/:username',component:ResetpassComponent,canActivate:[ResetpassgaurdGuard]}
 ];
 

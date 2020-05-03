@@ -14,6 +14,7 @@ import { AutherizationService } from './autherization.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { OtppageComponent } from './otppage/otppage.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
     HomeComponent,
     ForgotpasswordComponent,
     OtppageComponent,
-    ResetpassComponent
+    ResetpassComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
