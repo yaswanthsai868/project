@@ -18,7 +18,9 @@ const routes: Routes = [
   {path:"aboutus",component:AboutusComponent},
   {path:'forgotpassword',component:ForgotpasswordComponent},
   {path:'otp/:username',component:OtppageComponent},
-  {path:'reset/:username',component:ResetpassComponent,canActivate:[ResetpassgaurdGuard]}
+  {path:'reset/:username',component:ResetpassComponent,canActivate:[ResetpassgaurdGuard]},
+  {path:'admin',loadChildren:'./admin/admin.module#AdminModule'},
+  {path:'user',loadChildren:'./user/user.module#UserModule'}
 ];
 
 @NgModule({

@@ -5,8 +5,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 
 
 const routes: Routes = [
-  {path:'admin/dashboard',component:AdmindashboardComponent},
-  {path:'admin/addProduct',component:AddProductComponent}
+  {path:'dashboard',component:AdmindashboardComponent},
+  {path:'addProduct',component:AddProductComponent}
 ]
 
 @NgModule({
