@@ -8,8 +8,6 @@ import { RegisterComponent } from './register/register.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AdminModule} from './admin/admin.module';
-import {UserModule} from './user/user.module'
 import { AutherizationService } from './autherization.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { OtppageComponent } from './otppage/otppage.component';
@@ -29,8 +27,7 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
   imports: [
     BrowserModule,
     AppRoutingModule,FormsModule,
-    HttpClientModule,
-    AdminModule,UserModule
+    HttpClientModule
   ],
   providers: [
     {
