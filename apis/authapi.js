@@ -146,7 +146,7 @@ auth.post('/verifyotp',(req,res)=>{
                 {
                     if(unSignedToken.otp==req.body.otp)
                     {
-                        res.send({message:'Correct password'})
+                        res.send({message:'Correct OTP'})
                     }
                     else
                     {
@@ -181,5 +181,8 @@ auth.post('/resetpassword',(req,res)=>{
     })
 })
 
+auth.use((req,res,next)=>{
+    res.send({message:`Path ${req.url} not found for the method ${req.method}`})
+})
 
 module.exports=auth
