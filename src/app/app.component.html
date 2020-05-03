@@ -10,15 +10,22 @@
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home">HOME</a>
-      </li>
+      <div *ngIf=!ls.isAdmin>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">HOME</a>
+        </li>
+      </div>
+      <div *ngIf=ls.isAdmin>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/dashboard">HOME</a>
+        </li>
+      </div>
       <div *ngIf=!ls.status>
         <li class="nav-item">
           <a class="nav-link" routerLink="/signin">Sign In</a>
         </li>
       </div>
-      <div *ngIf=ls.status>
+      <div *ngIf="ls.status">
         <div class="dropdown">
           <li class="nav-link">Account</li>
           <div class="dropdown-content">

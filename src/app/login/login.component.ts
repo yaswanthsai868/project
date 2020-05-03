@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   ngOnInit()
   {
     this.ls.status=false;
+    this.ls.isAdmin=false;
     this.signOut();
   }
   constructor(private ls:LoginService,private router:Router) { }
@@ -33,10 +34,12 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token',res['token'])
           if(this.ls.username=='admin')
           {
-            this.router.navigateByUrl('/admin')
+            this.ls.isAdmin=true
+            this.router.navigateByUrl('/admin/dashboard')
           }
           else
           {
+            this.ls.isAdmin=false
             this.router.navigateByUrl('/user/mainpage')
           }
         }
