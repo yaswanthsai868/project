@@ -19,7 +19,6 @@ const routes: Routes = [
   {path:"aboutus",component:AboutusComponent},
   {path:'forgotpassword',component:ForgotpasswordComponent},
   {path:'otp/:username',component:OtppageComponent},
-  {path:'admin/addProduct',component:AddProductComponent},
   {path:'reset/:username',component:ResetpassComponent,canActivate:[ResetpassgaurdGuard]}
 ];
 
