@@ -1,46 +1,181 @@
-<div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      Select Product
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Mobile Phone</a>
-      <a class="dropdown-item" href="#">Laptop</a>
-      <a class="dropdown-item" href="#">Smart Watch</a>
-    </div>
+<!-- form for adding a product into data base -->
+
+<div class="mt-5 container"> 
+            <select id="chooseProduct"  class="form-control" (change)="display($event)" > 
+                <option value="none" selected disabled hidden> 
+                    Choose product 
+                </option> 
+                    <option value="Mobile" > Mobile</option>
+                    <option value="Laptop" >Laptop</option>
+            </select>
 </div>
 
-<div class="container">
-    <div class="text-primary display-3 text-center">Add a product</div>
+<form  #ref=ngForm (ngSubmit)=addProduct(ref.value) *ngIf= " ismobile" class="container mt-5 form-horizontal">
 
-       <form  submit="" action="" class="form-group">
-               <div class="form-group">
-                   <label for="productTitle">Title:</label>
-                   <input class="form-control" type="text" name="productTitle" id="productTitle">
-               </div> 
+            <!-- form for adding mobile -->
+                <div class="form-group">
+                    <label class="control-label" for="mobile-brand">Brand:</label>
+                    <input class="form-control" type="text" name="Brand" id="mobile-brand" ngModel>
+                </div> 
 
-               <div class="form-group">
-                   <label for="Price">Price:</label>
-                   <input class="form-control" type="text" name="Price" id="Price">
-               </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile-model">Model Name:</label>
+                    <input class="form-control" type="text" name="Model Name" id="mobile-model" ngModel>
+                </div> 
+                
+ 
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Price">Price:</label>
+                    <input class="form-control" type="text" name="Price" id="mobile-Price" ngModel>
+                </div>
+ 
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Description">Description:</label>
+                    <textarea class="form-control" name="Description" id="mobile-Description" cols="30" rows="5" ngModel></textarea>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label class="control-label" for="mobile-os">OS:</label>
+                    <input class="form-control" type="text" name="OS" id="mobile-os" ngModel>
+                </div>
+               
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Processor">Processor:</label>
+                    <input class="form-control" type="text" name="Processor" id="mobile-Processor" ngModel>
+                </div>
 
-               <div class="form-group">
-                   <label for="Description">Description:</label>
-                   <textarea class="form-control" name="Description" id="" cols="30" rows="10"></textarea>
-               </div>
-
-               <div class="form-group">
+                <div class="form-group">
+                    <label class="control-label" for="mobile-ram">RAM:</label>
+                    <input class="form-control" type="text" name="RAM" id="mobile-ram" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Weight">Weight:</label>
+                    <input class="form-control" type="text" name="Weight" id="mobile-Weight" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Dimensions">Dimensions:</label>
+                    <input class="form-control" type="text" name="Dimensions" id="mobile-Dimensions" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile-internalMemory">Internal Memory:</label>
+                    <input class="form-control" type="text" name="Internal Memory" id="mobile-internalMemory" ngModel>
+                </div>
+               
+                    
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Rear Camera">Rear Camera:</label>
+                    <input class="form-control" type="text" name="Rear Camera" id="mobile-Rear Camera"ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile-Front Camera">Front Camera:</label>
+                    <input class="form-control" type="text" name="Front Camera" id="mobile-Front Camera" ngModel>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="mobile-sold by">Sold by:</label>
+                    <input class="form-control" type="text" name="Sold by" id="mobile-sold by" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class= "control-label mr-3" for="mobile-photo">Upload Photo:  </label>
+                    <input type="file" name="Photo" id="mobile-photo" ngModel>
+                </div>
                    
-                   <label for="Category" > Select Category:</label>
-                       <select id="Category" class="form-control">
-                           <option value="phone">Phone</option>
-                           <option value="laptop">Laptop</option>
-                           <option value="smartWatch">Smart Watch</option>
-                       </select>                 
-               </div>
-               <div class="form-group">
-                   <label for="photo">Upload Photo :  </label>
-                   <input type="file" name="" id="photo">
-               </div>
+                <input type="submit" class="btn btn-primary mt-5">  
 
-       </form>
-</div>
+</form>
+
+
+<!-- form for adding laptop -->            
+
+<form #ref=ngForm *ngIf= " islaptop" (ngSubmit)=addProduct(ref.value)  class="container mt-5 form-horizontal">
+   
+                <div class="form-group">
+                    <label class="control-label" for="laptop-brand">Brand:</label>
+                    <input class="form-control" type="text" name="Brand" id="laptop-brand" ngModel>
+                </div> 
+
+                <div class="form-group">
+                    <label class="control-label" for="laptop-model">Model Name:</label>
+                    <input class="form-control" type="text" name="Model" id="laptop-model" ngModel>
+                </div> 
+                
+ 
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Price">Price:</label>
+                    <input class="form-control" type="text" name="Price" id="laptop-Price" ngModel>
+                </div>
+ 
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Description">Description:</label>
+                    <textarea class="form-control" name="Description" id="laptop-Description" cols="30" rows="5" ngModel></textarea>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label class="control-label" for="laptop-os">OS:</label>
+                    <input class="form-control" type="text" name="OS" id="laptop-os" ngModel>
+                </div>
+               
+                <div class="form-group">
+                    <label class="control-label" for="laptop-processorBrand">Processor Brand:</label>
+                    <input class="form-control" type="text" name="Processor Brand" id="laptop-processorBrand" ngModel>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="laptop-processorType">Processor Type:</label>
+                    <input class="form-control" type="text" name="Processor Type" id="laptop-processorType" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-processorSpeed">Processor Speed:</label>
+                    <input class="form-control" type="text" name="Processor Speed" id="laptop-processorSpeed" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-processorCount">Processor Count:</label>
+                    <input class="form-control" type="text" name="Processor Count" id="laptop-processorCount" ngModel>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="laptop-ram">RAM:</label>
+                    <input class="form-control" type="text" name="RAM" id="laptop-ram" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Weight">Weight:</label>
+                    <input class="form-control" type="text" name="Weight" id="laptop-Weight" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Dimensions">Dimensions:</label>
+                    <input class="form-control" type="text" name="Dimensions" id="laptop-Dimensions" ngModel>
+                </div>
+    
+                <div class="form-group">
+                    <label class="control-label" for="laptop-maxResolution">Maximum Display Resolution:</label>
+                    <input class="form-control" type="text" name="Max Resolution" id="laptop-maxResolution" ngModel>
+                </div>
+                
+               
+                <div class="form-group">
+                    <label class="control-label" for="laptop-hardDriveSize"> Hard Drive Size:</label>
+                    <input class="form-control" type="text" name="Hard Drive Size" id="laptop-hardDriveSize" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Graphics Coprocessor"> Graphics Coprocessor:</label>
+                    <input class="form-control" type="text" name="Graphics Coprocessor" id="laptop-Graphics Coprocessor" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="laptop-Graphics Card Description"> Graphics Card Description:</label>
+                    <input class="form-control" type="text" name="Graphics Card Description" id="laptop-Graphics Card Description" ngModel>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="laptop-sold by">Sold by:</label>
+                    <input class="form-control" type="text" name="Sold by" id="laptop-sold by" ngModel>
+                </div>
+                <div class="form-group">
+                    <label class= "control-label mr-3" for="laptop-photo">Upload Photo:  </label>
+                    <input type="file" name="Photo" id="laptop-photo" ngModel>
+                </div>
+            
+                <input type="submit" class="btn btn-primary mt-5">  
+     
+</form>
