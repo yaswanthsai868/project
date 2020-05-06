@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <label class="control-label" for="mobile-model">Model Name:</label>
-                    <input class="form-control" type="text" name="Model Name" id="mobile-model" ngModel>
+                    <input class="form-control" type="text" name="Model" id="mobile-model" ngModel>
                 </div> 
                 
  
@@ -74,13 +74,15 @@
                 
                 <div class="form-group">
                     <label class="control-label" for="mobile-sold by">Sold by:</label>
-                    <input class="form-control" type="text" name="Sold by" id="mobile-sold by" ngModel>
+                    <input class="form-control" type="text" name="Sold_By" id="mobile-sold by" ngModel>
                 </div>
                 <div class="form-group">
                     <label class= "control-label mr-3" for="mobile-photo">Upload Photo:  </label>
-                    <input type="file" name="Photo" id="mobile-photo" ngModel>
+                    <input type="file" name="Photo" id="mobile-photo" (change)="onSelectPhoto($event)" >
                 </div>
-                   
+                
+                <img [src]="photo" height="200"> <br/>
+                
                 <input type="submit" class="btn btn-primary mt-5">  
 
 </form>
@@ -169,13 +171,14 @@
 
                 <div class="form-group">
                     <label class="control-label" for="laptop-sold by">Sold by:</label>
-                    <input class="form-control" type="text" name="Sold by" id="laptop-sold by" ngModel>
+                    <input class="form-control" type="text" name="Sold_By" id="laptop-sold by" ngModel>
                 </div>
                 <div class="form-group">
                     <label class= "control-label mr-3" for="laptop-photo">Upload Photo:  </label>
-                    <input type="file" name="Photo" id="laptop-photo" ngModel>
+                    <input type="file" name="Photo" id="laptop-photo" (change)="onSelectPhoto($event)">
                 </div>
-            
+                <img [src]="photo" height="200"> <br/>
+     
                 <input type="submit" class="btn btn-primary mt-5">  
      
 </form>
