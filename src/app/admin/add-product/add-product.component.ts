@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AddproductService } from '../addproduct.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-product',
@@ -13,7 +15,7 @@ export class AddProductComponent implements OnInit {
   ismobile:boolean=false
   islaptop:boolean=false
   finalProductData: {[k: string]: any} = {};
-  constructor() { }
+  constructor(private hc:HttpClient) { }
 
   ngOnInit() {
   }
@@ -54,8 +56,23 @@ export class AddProductComponent implements OnInit {
         {
             tempobj.type="Laptop";
         }
+        
         this.finalProductData=tempobj;
-        console.log(this.finalProductData);
+        
+        this.hc.post('/admin/addproduct',this.finalProductData).subscribe((result)=>{
+                
+            if(result['message']== 'success')
+            {
+              alert("Product added successfully");
+            }
+            else
+            {
+              alert("unable to add a product, please try after some time");
+            } 
+        })
+      
+
+
   }
 
 

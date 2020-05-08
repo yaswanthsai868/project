@@ -54,7 +54,8 @@ mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true}
     {
         app.locals.userCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionUser);
         app.locals.adminCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionAdmin);
-        app.locals.resetPasswordCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionResetPass)
+        app.locals.resetPasswordCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionResetPass);
+        app.locals.productsCollection =clientObj.db(process.env.dbName).collection(process.env.dbCollectionProducts); 
         console.log('Database connected.....')
         app.listen(process.env.port,()=>{console.log(`server listening on port:${process.env.port}.....`)});
     }
