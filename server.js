@@ -24,7 +24,7 @@ const authapi=require('./apis/authapi')
 //connecting to frontend
 app.use(exp.static(path.join(__dirname,'./dist/ecommerce')))
 
-app.use(exp.json())
+app.use(exp.json({ limit: '1mb' }))
 
 //sending request to admin and user api
 app.use('/admin',adminApi)
@@ -45,6 +45,7 @@ var schedulerjob=scheduler.scheduleJob('0 0 * * *',()=>{
     })
 })
 
+let productsCollection
 mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true},(err,clientObj)=>{
     if(err)
     {
@@ -52,15 +53,17 @@ mongoDb.connect(process.env.dbUrl,{useUnifiedTopology:true,useNewUrlParser:true}
     }
     else
     {
+        
         app.locals.userCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionUser);
         app.locals.adminCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionAdmin);
         app.locals.resetPasswordCollection=clientObj.db(process.env.dbName).collection(process.env.dbCollectionResetPass);
-        app.locals.productsCollection =clientObj.db(process.env.dbName).collection(process.env.dbCollectionProducts); 
+        app.locals.pC =clientObj.db(process.env.dbName).collection(process.env.dbCollectionProducts); 
+       
+
         console.log('Database connected.....')
         app.listen(process.env.port,()=>{console.log(`server listening on port:${process.env.port}.....`)});
     }
 })
-
 
 app.use((req,res,next)=>{
     res.send({message:`Path ${req.url} not found for the method ${req.method}`})

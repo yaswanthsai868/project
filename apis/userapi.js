@@ -48,6 +48,7 @@ userApp.post('/register',(req,res)=>{
 
 //login
 userApp.post('/login',(req,res)=>{
+    
     userCollection=req.app.locals.userCollection;
     userCollection.findOne({username:req.body.username},(err,obj)=>{
         if(err)

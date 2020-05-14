@@ -11,6 +11,7 @@ export class AddProductComponent implements OnInit {
 
   isProduct:string ="none"
   features:any
+  photofile:Blob
   photo :string | ArrayBuffer ='';
   ismobile:boolean=false
   islaptop:boolean=false
@@ -21,13 +22,11 @@ export class AddProductComponent implements OnInit {
   }
   onSelectPhoto(event) {
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
+      var reader = new FileReader();      
+      this.photofile=event.target.files[0];   
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-
       reader.onload = (event:any) => { // called once readAsDataURL is completed
-        
-       this.photo = event.target.result ;
+         this.photo = event.target.result ;
       }
     }
   }
@@ -58,7 +57,8 @@ export class AddProductComponent implements OnInit {
         }
         
         this.finalProductData=tempobj;
-        
+        console.log(this.finalProductData);
+
         this.hc.post('/admin/addproduct',this.finalProductData).subscribe((result)=>{
                 
             if(result['message']== 'success')
@@ -67,7 +67,7 @@ export class AddProductComponent implements OnInit {
             }
             else
             {
-              alert("unable to add a product, please try after some time");
+              alert(`unable to add a product, please try after some time ${result['message']}`);
             } 
         })
       
