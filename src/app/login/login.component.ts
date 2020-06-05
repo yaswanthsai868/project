@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
+import { resolve } from 'url';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +9,13 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
   ngOnInit()
   {
     this.ls.status=false;
     this.ls.isAdmin=false;
     this.signOut();
+    
   }
   constructor(private ls:LoginService,private router:Router) { }
   login(formObject)

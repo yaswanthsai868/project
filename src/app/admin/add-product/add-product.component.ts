@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddproductService } from '../addproduct.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -15,55 +16,33 @@ export class AddProductComponent implements OnInit {
   photo :string | ArrayBuffer ='';
   ismobile:boolean=false
   islaptop:boolean=false
-  finalProductData: {[k: string]: any} = {};
-  constructor(private hc:HttpClient) { }
+  constructor(private hc:HttpClient,private router:Router) { }
 
   ngOnInit() {
   }
   onSelectPhoto(event) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();      
-      this.photofile=event.target.files[0];   
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-      reader.onload = (event:any) => { // called once readAsDataURL is completed
-         this.photo = event.target.result ;
-      }
+    let file=new FileReader();
+    this.photofile=event.target.files[0]
+    file.readAsDataURL(event.target.files[0])
+    file.onload=()=>{
+      this.photo=file.result;
     }
   }
 
-  addProduct(product_data:any)
+  addProduct(productFormRef)
   {
-        var tempobj: {[k: string]: any} = {};
-        tempobj.Brand = product_data.Brand;
-        tempobj.Model_Name  =product_data.Model;
-        tempobj.Price= product_data.Price;
-        tempobj.Description=product_data.Description;
-        tempobj.Sold_by =  product_data.Sold_By;
-        tempobj.Photo = this.photo;
-         delete product_data.Brand;
-         delete product_data.Model;
-         delete product_data.Price;
-         delete product_data.Description;
-         delete product_data.Sold_By;
-        tempobj.features=product_data;
-        if(this.ismobile)
-        {
-          
-          tempobj.type="Mobile";
-        }
-        else if(this.islaptop)
-        {
-            tempobj.type="Laptop";
-        }
-        
-        this.finalProductData=tempobj;
-        console.log(this.finalProductData);
-
-        this.hc.post('/admin/addproduct',this.finalProductData).subscribe((result)=>{
+      let fd=new FormData()
+      let product=productFormRef.value
+      product['type']=this.isProduct
+      fd.append('productdata',JSON.stringify(productFormRef.value))
+      fd.append('images',this.photofile)
+        this.hc.post('/admin/addproduct',fd).subscribe((result)=>{
                 
             if(result['message']== 'success')
             {
               alert("Product added successfully");
+              productFormRef.reset();
+              this.router.navigateByUrl('/admin/dashboard')
             }
             else
             {
@@ -71,7 +50,6 @@ export class AddProductComponent implements OnInit {
             } 
         })
       
-
 
   }
 

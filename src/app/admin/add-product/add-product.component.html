@@ -10,7 +10,7 @@
             </select>
 </div>
 
-<form  #ref=ngForm (ngSubmit)=addProduct(ref.value) *ngIf= " ismobile" class="container mt-5 form-horizontal">
+<form  #ref=ngForm (ngSubmit)=addProduct(ref) *ngIf= " ismobile" class="container mt-5 form-horizontal">
 
             <!-- form for adding mobile -->
                 <div class="form-group">
@@ -90,7 +90,7 @@
 
 <!-- form for adding laptop -->            
 
-<form #ref=ngForm *ngIf= " islaptop" (ngSubmit)=addProduct(ref.value)  class="container mt-5 form-horizontal">
+<form #ref=ngForm *ngIf= " islaptop" (ngSubmit)=addProduct(ref)  class="container mt-5 form-horizontal">
    
                 <div class="form-group">
                     <label class="control-label" for="laptop-brand">Brand:</label>
